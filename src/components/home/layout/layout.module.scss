@@ -1,0 +1,91 @@
+.card_content {
+    
+    width: 1400px;
+    max-width: calc(100% - 30px);
+    margin: 35px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap:25px;
+    padding-bottom:30px ;
+
+  
+}
+
+.layout{
+    background-color: rgb(193, 211, 228);
+}
+
+
+
+
+.section_pagination{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 40px 0;
+    align-items: center;
+
+    .container_pagination{
+        width: auto;
+        height: 32px;
+        background-color: #5865f2;
+        display: flex;
+        border-radius: 8px;
+        overflow: hidden;
+    
+        .item_izquierdo{
+            background-color: #5865f2;
+            width: 30px;
+            height: 30px;
+            color: white;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }.item{
+            color: white;
+            height: 30px;
+            width: 40px;
+            display: grid;
+            place-items: center;
+            background-color: #424242;
+            border: 1px solid #5865f2;
+        }.item_derecho{
+            background-color: #5865f2;
+            width: 30px;
+            height: 30px;
+            color: white;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+    }
+    .div_search {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 30px;
+        box-shadow: 1px 1px 4px #000;
+    
+        @media screen and (max-width:500px) {
+            width: 50%;
+        }
+    
+        >div {
+            width: 20%;
+            background-color: rgb(31, 134, 237);
+            height: 30px;
+            display: grid;
+            place-items: center;
+            color: white;
+        }
+    
+        >input {
+            width: 80%;
+            padding: 4px 10px;
+            height: 30px;
+            border: none;
+            outline: none;
+        }
+    }
+}

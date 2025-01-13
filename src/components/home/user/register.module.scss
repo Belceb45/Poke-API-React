@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+  background-color: rgb(193, 211, 228);
+  
+}
+
+.register {
+  font-family: 'Press Start 2P', cursive;
+  max-width: 320px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f8f8f8;
+  border: 4px solid #3c5aa6;
+  border-radius: 10px;
+  box-shadow: 0 0 0 4px #f8f8f8, 0 0 0 8px #3c5aa6, 0 10px 20px rgba(0,0,0,0.3);
+  color: #2a75bb;
+  text-align: center;
+
+  h1 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #c7a008;
+    text-shadow: 2px 2px #3c5aa6;
+  }
+
+  form {
+    background-color: #ffffff;
+    border: 4px solid #3c5aa6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  label {
+    display: block;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    color: #3c5aa6;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border: 2px solid #3c5aa6;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #2a75bb;
+    font-family: 'Press Start 2P', cursive;
+
+    &:focus {
+      outline: none;
+      border-color: #ffcb05;
+      box-shadow: 0 0 0 2px rgba(255, 203, 5, 0.5);
+    }
+  }
+
+  button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #ffcb05;
+    border: 2px solid #c7a008;
+    color: #3c5aa6;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: #c7a008;
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    &:active {
+      background-color: #3c5aa6;
+      color: #ffffff;
+      transform: translateY(1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.pokeball {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 10px;
+  vertical-align: middle;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: #ffffff;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

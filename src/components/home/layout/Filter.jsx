@@ -8,13 +8,15 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function Filter() {
+export default function Filter({ selectedTypes = [], onTypesChange, types = [] }) {
   return (
     <Autocomplete
       multiple
       id="checkboxes-tags-demo"
-      options={typesPokemons}
+      options={types}
       disableCloseOnSelect
+      value={selectedTypes}  // Asegurarse de que esto sea un array
+      onChange={(_, newValue) => onTypesChange(newValue)}  // Cambiar a array
       getOptionLabel={(option) => option.title}
       renderOption={(props, option, { selected }) => {
         const { key, ...optionProps } = props;
@@ -32,31 +34,8 @@ export default function Filter() {
       }}
       style={{ width: 300 }}
       renderInput={(params) => (
-        <TextField {...params} label="Ordenar por" placeholder="Filtro" />
+        <TextField {...params} label="Filtrar por Tipo" placeholder="Seleccionar tipos" />
       )}
     />
   );
 }
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const typesPokemons = [
-  { title: 'Planta'},
-  { title: 'Fuego'},
-  { title: 'Bicho'},
-  { title: 'Hada'},
-  { title: 'Dragón'},
-  { title: 'Fantasma'},
-  { title: 'Tierra'},
-  { title: 'Normal'},
-  { title: 'Psiquico'},
-  { title: 'Acero'},
-  { title: 'Siniestro'},
-  { title: 'Electrico'},
-  { title: 'Lucha'},
-  { title: 'Volador'},
-  { title: 'Hielo'},
-  { title: 'Veneno'},
-  { title: 'Roca'},
-  { title: 'Agua'},
-
-];

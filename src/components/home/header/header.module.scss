@@ -1,34 +1,89 @@
 .header {
     background-color: #ab3838;
-
-
-    .div_header {
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 1400px;
-        max-width: calc(100% - 30px);
-        margin: 0 auto;
-
-        .div_logo {
-            >img {
-                width: 120px;
-            }
-        }
-
-        .navbar-menu {
-            display: flex;
-            flex-direction: column;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-          }
-          
-          .navbar-item {
-            margin-left: 1.5rem;
-          }
-
-        
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .div_header {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-left: 450px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    >h1{
+        font-size: 25px;
     }
 }
+  
+  .navbar_pokemon {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .div_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+   
+      height: 40px;
+      width: auto;
+    }
+  }
+  
+  .navbar_menu {
+    display: flex;
+    list-style-type: none;
+    margin-left: 20px;
+  }
+  
+  .navbar_item {
+    margin-left: 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+  
+    &:hover {
+      color: #ffd700;
+    }
+  
+    svg {
+      margin-right: 0.5rem;
+    }
+  
+    span {
+        font-size: 18px;
+      display: inline-block;
+    }
+  }
+  
+  // Responsive design
+  @media (max-width: 768px) {
+    .div_header {
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      >h1{
+        display: none;
+      }
+    }
+  
+    .navbar_menu {
+      margin-top: 1rem;
+      flex-direction: column;
+    }
+  
+    .navbar_item {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  

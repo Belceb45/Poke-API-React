@@ -1,38 +1,53 @@
 .card_content {
-    
+
     width: 1400px;
     max-width: calc(100% - 30px);
     margin: 35px auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap:25px;
-    padding-bottom:30px ;
+    gap: 25px;
+    padding-bottom: 30px;
 
-  
+
 }
 
-.layout{
+.layout {
     background-color: rgb(193, 211, 228);
+    padding: 10px 0;
+
+}
+
+.container_search_page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    padding: 20px 0;
+
+    @media screen and (max-width:500px) {
+        flex-direction: column;
+        width: 100%;
+    }
+
 }
 
 
 
-
-.section_pagination{
+.section_pagination {
     display: flex;
     justify-content: space-evenly;
-    margin: 40px 0;
     align-items: center;
-
-    .container_pagination{
+    padding: 20px 0;
+    
+    .container_pagination {
         width: auto;
         height: 32px;
         background-color: #5865f2;
         display: flex;
         border-radius: 8px;
         overflow: hidden;
-    
-        .item_izquierdo{
+
+        .item_izquierdo {
             background-color: #5865f2;
             width: 30px;
             height: 30px;
@@ -40,7 +55,9 @@
             display: grid;
             place-items: center;
             cursor: pointer;
-        }.item{
+        }
+
+        .item {
             color: white;
             height: 30px;
             width: 40px;
@@ -48,7 +65,9 @@
             place-items: center;
             background-color: #424242;
             border: 1px solid #5865f2;
-        }.item_derecho{
+        }
+
+        .item_derecho {
             background-color: #5865f2;
             width: 30px;
             height: 30px;
@@ -57,20 +76,23 @@
             place-items: center;
             cursor: pointer;
         }
+        @media screen and (max-width:500px) {
+            margin-top: 15px;
+            
+        }
     }
+
     .div_search {
-        width: 30%;
+        width: 50%;
         display: flex;
         align-items: center;
         border-radius: 10px;
         overflow: hidden;
         height: 30px;
         box-shadow: 1px 1px 4px #000;
-    
-        @media screen and (max-width:500px) {
-            width: 50%;
-        }
-    
+
+
+
         >div {
             width: 20%;
             background-color: rgb(31, 134, 237);
@@ -78,8 +100,9 @@
             display: grid;
             place-items: center;
             color: white;
+
         }
-    
+
         >input {
             width: 80%;
             padding: 4px 10px;
@@ -87,5 +110,11 @@
             border: none;
             outline: none;
         }
+    }
+    @media screen and (max-width:500px) {
+        flex-direction: column;
+        width: 100%;
+        
+        
     }
 }

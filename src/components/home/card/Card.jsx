@@ -3,14 +3,16 @@ import scss from './card.module.scss'
 import { useEffect } from "react";
 import { URL_ESPECIES, URL_EVOLICIONES, URL_POKEMON } from "../../../api/apiREST";
 import axios from 'axios'
+import PortalButton from "./PortalButton";
 
-
-export default function Card({ card }) {
+export default function Card({ card, onAddClick }) {
 
     const [itemPokemon, setItemPokemon] = useState({});
     const [especiePokemon, setEspeciePokemon] = useState({});
     const [evoluciones, setEvoluciones] = useState([]);
 
+
+    
 
     useEffect(() => {
         const dataPokemon = async () => {
@@ -46,13 +48,13 @@ export default function Card({ card }) {
 
             const obtenerEvoluciones = async () => {
                 const arrayEvoluciones = [];
-            
+
                 try {
                     if (especiePokemon?.url_especie?.url) {
                         const URL = especiePokemon.url_especie.url.split("/");
                         if (URL.length > 6) {
                             const api = await axios.get(`${URL_EVOLICIONES}/${URL[6]}`);
-            
+
                             const URL2 = api?.data?.chain?.species?.url?.split("/");
                             if (URL2 && URL2.length > 6) {
                                 const img1 = await getPokemonImage(URL2[6]);
@@ -61,7 +63,7 @@ export default function Card({ card }) {
                                     name: api?.data?.chain?.species?.name,
                                 });
                             }
-            
+
                             if (api?.data?.chain?.evolves_to?.length !== 0) {
                                 const DATA2 = api?.data?.chain?.evolves_to[0]?.species;
                                 const ID = DATA2?.url?.split("/");
@@ -72,7 +74,7 @@ export default function Card({ card }) {
                                         name: DATA2?.name,
                                     });
                                 }
-            
+
                                 if (api?.data?.chain?.evolves_to[0]?.evolves_to?.length !== 0) {
                                     const DATA3 = api?.data?.chain?.evolves_to[0]?.evolves_to[0]?.species;
                                     const ID = DATA3?.url?.split("/");
@@ -85,7 +87,7 @@ export default function Card({ card }) {
                                     }
                                 }
                             }
-            
+
                             setEvoluciones(arrayEvoluciones);
                         } else {
                             console.warn("URL incompleta:", especiePokemon.url_especie.url);
@@ -95,7 +97,7 @@ export default function Card({ card }) {
                     console.error("Error al obtener evoluciones:", error);
                 }
             };
-            
+
 
             obtenerEvoluciones()
         }
@@ -111,13 +113,15 @@ export default function Card({ card }) {
         pokeID = "0" + pokeID;
     }
 
-
     return (
         <div className={scss.card}>
             <img className={scss.img_pokemon} src={itemPokemon?.sprites?.other["official-artwork"]?.front_default} alt="pokemon"></img>
             <div className={`bg-${especiePokemon?.data?.color?.name} ${scss.sub_card}`}>
-                <strong className={scss.id_card}  > {pokeID} </strong>
-                <strong className={scss.name_card}  > {itemPokemon.name} </strong>
+                <strong className={scss.id_card}  > #{pokeID} </strong>
+                <div className={scss.content_add}>
+                    <strong className={scss.name_card}  > {itemPokemon.name} </strong>
+                    <PortalButton onClick={() => onAddClick(itemPokemon)} />
+                </div>
                 <h4 className={scss.altura_pokemon}  >Altura: {itemPokemon.height}0 cm</h4>
                 <h4 className={scss.peso_pokemon}  >Peso: {itemPokemon.weight / 10} kg</h4>
                 <h4 className={scss.habitat_pokemon}  >Habitat: {especiePokemon?.data?.habitat?.name}</h4>

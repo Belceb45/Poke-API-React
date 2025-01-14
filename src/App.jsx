@@ -7,10 +7,7 @@ import Login from './components/home/user/Login';
 import PerfilUsuario from './components/home/user/PerfilPoke'; // Componente para el perfil
 import { UserProvider } from './components/home/user/UserContext'; // Proveedor de contexto para el manejo global del usuario
 
-/**
- * Componente principal de la aplicación.
- * Configura el enrutamiento y envuelve la app con el contexto global de usuario.
- */
+
 function App() {
   return (
     // UserProvider envuelve toda la aplicación para gestionar el estado global del usuario

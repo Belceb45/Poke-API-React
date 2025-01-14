@@ -1,5 +1,5 @@
 import React from 'react';
-import scss from './modalconfirm.module.scss'; // Asegúrate de importar el archivo CSS
+import scss from './modalconfirm.module.scss'; 
 
 export default function ModalConfirm({ onClose, onConfirm, pokemon }) {
   return (

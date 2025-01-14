@@ -120,7 +120,8 @@ export default function Card({ card, onAddClick }) {
                 <strong className={scss.id_card}  > #{pokeID} </strong>
                 <div className={scss.content_add}>
                     <strong className={scss.name_card}  > {itemPokemon.name} </strong>
-                    <PortalButton onClick={() => onAddClick(itemPokemon)} />
+                    <PortalButton onClick={() => onAddClick(itemPokemon)} /> {/*Portal*/}
+
                 </div>
                 <h4 className={scss.altura_pokemon}  >Altura: {itemPokemon.height}0 cm</h4>
                 <h4 className={scss.peso_pokemon}  >Peso: {itemPokemon.weight / 10} kg</h4>

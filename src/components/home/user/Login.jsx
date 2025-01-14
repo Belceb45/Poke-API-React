@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { getDatabase, ref, get } from 'firebase/database'; // Importa las funciones necesarias de Firebase
+import { getDatabase, ref, get } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../user/UserContext'; // Importar el hook del UserContext
+import { useUser } from '../user/UserContext';
 import scss from './login.module.scss';
-import { app } from '../../../firebase'; // Asegúrate de que la configuración de Firebase esté correctamente importada
+import { app } from '../../../firebase';
 
 export default function Login() {
-  const { setUser } = useUser(); // Acceder al setUser del contexto
+  const { setUser } = useUser(); // Contexto del usuario
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -21,26 +21,28 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(''); // Restablece el mensaje
+    setMessage('');
 
     try {
       const db = getDatabase(app);
-      const userId = formData.username.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''); // Asegúrate de que el nombre de usuario sea consistente con la base de datos
-
-      // Obtener los datos del usuario desde Firebase
+      const userId = formData.username.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
       const userRef = ref(db, 'Users/' + userId);
       const userSnapshot = await get(userRef);
 
       if (userSnapshot.exists()) {
         const user = userSnapshot.val();
 
-        // Verificar la contraseña
         if (user.pass === formData.password) {
-          // Si las credenciales son correctas, almacena el usuario en el contexto global y localStorage
-          setUser({ username: formData.username });
-          localStorage.setItem('user', JSON.stringify({ username: formData.username }));
+          const userData = { username: formData.username };
 
-          navigate('/perfil'); // Redirige al perfil
+          //  Guarda primero en el contexto
+          setUser(userData);
+
+          //  Luego sincroniza con localStorage
+          localStorage.setItem('user', JSON.stringify(userData));
+
+          //  Finalmente, redirige al perfil
+          navigate('/perfil');
         } else {
           setMessage('Contraseña incorrecta');
         }

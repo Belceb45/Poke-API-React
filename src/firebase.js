@@ -5,9 +5,9 @@ import { getAnalytics } from "firebase/analytics"; // Si aún lo necesitas para 
 
 // Configuración de Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyC2EshVD8c-SauZyDGP68Ep0yrXUB5HqoY",
-  authDomain: "pokeuser-f4fcc.firebaseapp.com",
-  databaseURL: "https://pokeuser-f4fcc-default-rtdb.firebaseio.com",
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
   projectId: "pokeuser-f4fcc",
   storageBucket: "pokeuser-f4fcc.firebasestorage.app",
   messagingSenderId: "284730641537",

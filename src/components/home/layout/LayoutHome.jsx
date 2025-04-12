@@ -6,8 +6,12 @@ import * as FaIcons from 'react-icons/fa';
 import Card from '../card/Card';
 import Filter from './Filter';
 import ModalConfirm from '../card/ModalConfirm';
+import { useUser } from '../user/UserContext';
+{/*Base de datos */ }
+import { getDatabase, ref, set,get } from 'firebase/database'; // Importamos Firebase
 
 export default function LayoutHome() {
+  const { user } = useUser();
   const [arrayPokemon, setArrayPokemon] = useState([]);
   const [globalPokemon, setGlobalPokemon] = useState([]);
   const [pages, setPages] = useState(1);
@@ -23,18 +27,47 @@ export default function LayoutHome() {
   };
 
   const handleOpenModal = (pokemon) => {
-    setSelectedPokemon(pokemon);
-    setShowModal(true);
+    if (user) { // Verifica si el usuario está logeado
+      setSelectedPokemon(pokemon);
+      setShowModal(true);
+    } else {
+      alert("Debes iniciar sesión para agregar Pokémon.");
+    }
   };
-
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedPokemon(null);
   };
 
-  const handleConfirmAdd = () => {
-    alert(`¡${selectedPokemon?.name} ha sido agregado!`);
-    setShowModal(false);
+  const handleConfirmAdd = async () => {
+    if (user && selectedPokemon) {
+      const db = getDatabase(); // Inicializamos la base de datos de Firebase
+      const userId = user.username.toLowerCase(); // Usamos el nombre de usuario como identificador único
+      const pokemonId = selectedPokemon.name; // Usamos el nombre del Pokémon como ID
+
+      // Verificar si el Pokémon ya existe en la biblioteca del usuario
+      const pokemonRef = ref(db, `Users/${userId}/pokedex/${pokemonId}`);
+      const snapshot = await get(pokemonRef);
+
+      if (snapshot.exists()) {
+        // Si el Pokémon ya existe, mostramos un mensaje de que ya está agregado
+        alert(`${selectedPokemon.name} ya está en tu biblioteca.`);
+        handleCloseModal();
+      } else {
+        // Si no existe, lo agregamos a la biblioteca del usuario
+        try {
+          await set(pokemonRef, {
+            name: selectedPokemon.name
+          });
+
+          alert(`${selectedPokemon.name} ha sido agregado a tu biblioteca!`);
+          setShowModal(false);
+        } catch (error) {
+          console.error("Error al agregar Pokémon:", error);
+          alert("Hubo un error al agregar el Pokémon.");
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -106,13 +139,17 @@ export default function LayoutHome() {
         </div>
       </section>
 
-      {showModal && (
+      {showModal && selectedPokemon && (
         <ModalConfirm
+          title="Agregar Pokémon"
+          message={`¿Quieres agregar a ${selectedPokemon?.name} a tu pokedex?`}
+          confirmText="Agregar"
+          cancelText="Cancelar"
           onClose={handleCloseModal}
           onConfirm={handleConfirmAdd}
-          pokemon={selectedPokemon}
         />
       )}
+
 
       <div className={scss.card_content}>
         {filterPokemons.map((card, index) => (
